@@ -8,6 +8,7 @@ To run this code:
      b. gold images binary segmentations (check the paper)
      c. you need to create persistent homology diagram numbers for gold images and store them as a numpy file.
          For this: create dgms0 and dgms1 folders in your gold folder and run this code snippet with correct folder addresses :)
+   
          *****
               import numpy as np
               import skimage.segmentation as sg
