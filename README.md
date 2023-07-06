@@ -1,5 +1,5 @@
 # TopologyAware
-Code of "Topology-Aware Loss Function for Aorta and Great Vessel Segmentation in Computed Tomography Images" paper. Pre-print paper is uploaded here.
+This code implements a segmentation network that uses a topology-aware loss function. Details are in "Topology-Aware Loss Function for Aorta and Great Vessel Segmentation in Computed Tomography Images" paper. Pre-print of paper is uploaded here.
 
 To run this code:
 1. put the base and our folders into the same folder -- or you may change the addresses in our folder. You will go from our to base --
