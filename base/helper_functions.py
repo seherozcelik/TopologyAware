@@ -5,20 +5,9 @@ import numpy as np
 import pydicom
 import cv2
 
-import skimage.segmentation as sg
-
 from model import UNet   
 
 import json
-
-def getXYofboundary(im):
-
-    bnd = sg.find_boundaries(im, mode='inner').astype(np.uint8)
-    
-    return getXY(bnd)
-
-def getXY(bnd):
-    return np.transpose(np.nonzero(bnd))  
 
 def prepare_gold_and_weights(label_name):
     goldImage = cv2.imread(label_name,cv2.IMREAD_GRAYSCALE) 
