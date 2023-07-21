@@ -26,7 +26,7 @@ def model_eval(model, data_loader, loss_func):
         avrg_loss = loss / len(data_loader)  
         return avrg_loss   
 
-def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name,data_type):
+def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name):
     
     model = UNet(in_channel,first_out_channel).cuda()
 
