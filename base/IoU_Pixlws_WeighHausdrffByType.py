@@ -1,8 +1,6 @@
-from model import UNet
 import helper_functions as hp
 import numpy as np
 import os
-import scipy.io
 import cv2
 import json
 from skimage import metrics
@@ -223,7 +221,7 @@ def pixelwise(pred,gold):
 
     return getPrecRecallFScore(TP, FP, FN)
 
-def getResultsPixelwise(first_out_channel, threshold, goldBinary_folder, ts_folder, model_name_pre, run_num):
+def getResultsPixelwise(first_out_channel, goldBinary_folder, ts_folder, model_name_pre, run_num):
     
     with open('../../data/vesseltypes.json') as f:
         fileTypesDict = json.load(f)
@@ -321,7 +319,7 @@ def wdh_one(first_cc,second_cc,first,second, flag):
         whd = whd + (weight * hd)   
     return whd        
 
-def getResultsWeightdHausdorff(first_out_channel, threshold, goldBinary_folder, ts_folder, model_name_pre, run_num):
+def getResultsWeightdHausdorff(first_out_channel, goldBinary_folder, ts_folder, model_name_pre, run_num):
     
     with open('../../data/vesseltypes.json') as f:
         fileTypesDict = json.load(f)
@@ -398,7 +396,7 @@ def create_result_excel(num_of_runs, threshold, goldBinary_folder, ts_folder, mo
     worksheet.write(iii, 0, "Pixelwise");  
     
     for i in range(1,num_of_runs+1):        
-        resultPixelwise = getResultsPixelwise(32, threshold, goldBinary_folder, ts_folder, model_name_pre, i)
+        resultPixelwise = getResultsPixelwise(32, goldBinary_folder, ts_folder, model_name_pre, i)
         
         worksheet.write(iii+i, 0, "run_"+str(i)); 
         
@@ -410,7 +408,7 @@ def create_result_excel(num_of_runs, threshold, goldBinary_folder, ts_folder, mo
     worksheet.write(iiii, 1, "all"); worksheet.write(iiii, 2, "big"); worksheet.write(iiii, 3, "small");
     
     for i in range(1,num_of_runs+1):        
-        resultWhd = getResultsWeightdHausdorff(32, threshold, goldBinary_folder, ts_folder, model_name_pre, i)
+        resultWhd = getResultsWeightdHausdorff(32, goldBinary_folder, ts_folder, model_name_pre, i)
         
         worksheet.write(iiii+i, 0, "run_"+str(i)); 
         
