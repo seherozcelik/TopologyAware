@@ -1,9 +1,9 @@
 import train as trn
 import matplotlib.pyplot as plt
 
-def callMain(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name,data_type):
+def callMain(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name):
    
-    losses, val_losses = trn.train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta,model_name,data_type)
+    losses, val_losses = trn.train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta,model_name)
 
     fig, ax = plt.subplots()
     plt.xlabel('epochs')
