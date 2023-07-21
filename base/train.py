@@ -21,7 +21,7 @@ def model_eval(model, data_loader, loss_func):
     model.eval()
     with torch.no_grad():
         for input, label in data_loader:    
-            pred = model(input[0].cuda())
+            pred = model(input.cuda())
             loss += loss_func(pred, label)
         avrg_loss = loss / len(data_loader)  
         return avrg_loss   
@@ -34,8 +34,8 @@ def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr
 
     optimizer = optim.Adadelta(model.parameters(),lr) # weight_decay = 0.5
 
-    train_loader = data.DataLoader(hp.getData(trn_folder, gold_folder, data_type),batch_size=1, shuffle=True)
-    val_loader = data.DataLoader(hp.getData(val_folder, gold_folder, data_type), batch_size=1)
+    train_loader = data.DataLoader(hp.getData(trn_folder, gold_folder),batch_size=1, shuffle=True)
+    val_loader = data.DataLoader(hp.getData(val_folder, gold_folder), batch_size=1)
     
     losses = []
     val_losses = []
@@ -48,7 +48,7 @@ def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr
         loss_sum = 0
         model.train()
         for input, label in train_loader:
-            output = model(input[0].cuda())
+            output = model(input.cuda())
       
             optimizer.zero_grad()
             loss = loss_func(output,label)
