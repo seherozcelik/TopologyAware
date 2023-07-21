@@ -28,7 +28,7 @@ for i in range(1,num_of_runs+1):
         model_name = model_name_pre + '_' + str(i) + '.pth'
 
 
-    uNetMain.callMain(in_channel, first_out_channel, trn_folder, val_folder, goldBinary_folder, lr, patience, min_delta, model_name, data_type)
+    uNetMain.callMain(in_channel, first_out_channel, trn_folder, val_folder, goldBinary_folder, lr, patience, min_delta, model_name)
 
     from IPython.display import display_html
     display_html("<script>Jupyter.notebook.kernel.restart()</script>",raw=True)
