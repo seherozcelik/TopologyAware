@@ -7,7 +7,7 @@ import cv2
 
 from model import UNet   
 
-def prepare_gold_and_weights(label_name):
+def prepare_gold(label_name):
     goldImage = cv2.imread(label_name,cv2.IMREAD_GRAYSCALE) 
     
     goldImage = goldImage.astype(np.float32)
@@ -34,7 +34,7 @@ def getData(folder, gold_folder):
         im = np.expand_dims(im,0)
         im = normalizeImage(im)
 
-        label = prepare_gold_and_weights(gold_folder + '/' + name.split('.')[0] + '.png')
+        label = prepare_gold(gold_folder + '/' + name.split('.')[0] + '.png')
 
         data.append([im, label])
 
