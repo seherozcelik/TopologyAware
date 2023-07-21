@@ -7,8 +7,6 @@ import cv2
 
 from model import UNet   
 
-import json
-
 def prepare_gold_and_weights(label_name):
     goldImage = cv2.imread(label_name,cv2.IMREAD_GRAYSCALE) 
     
@@ -25,28 +23,20 @@ def normalizeImage(img):
 
     return normImg.astype(np.float32)
 
-def getData(folder, gold_folder, data_type):
-    
-    with open('../../data/vesseltypes.json') as f:
-        fileTypesDict = json.load(f)
+def getData(folder, gold_folder):
 
     image_names = os.listdir(folder)
 
     data = []
 
     for name in image_names:
-        if data_type == 'all' or (data_type == 'big' and (fileTypesDict[name] == 'f' or fileTypesDict[name] == 'm')
-                                 ) or (data_type == 'small' and (fileTypesDict[name] == 's' or fileTypesDict[name] == 'm')):
-            im = pydicom.dcmread(folder + '/' + name).pixel_array
-            im = np.expand_dims(im,0)
-            im = normalizeImage(im)
-            inpt = []
-            inpt.append(im)
-            inpt.append(name)
+        im = pydicom.dcmread(folder + '/' + name).pixel_array
+        im = np.expand_dims(im,0)
+        im = normalizeImage(im)
 
-            label = prepare_gold_and_weights(gold_folder + '/' + name.split('.')[0] + '.png')
+        label = prepare_gold_and_weights(gold_folder + '/' + name.split('.')[0] + '.png')
 
-            data.append([inpt, label])
+        data.append([im, label])
 
     return data   
 
