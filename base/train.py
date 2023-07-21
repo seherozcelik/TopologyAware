@@ -10,11 +10,7 @@ import cv2
 
 import helper_functions as hp
 from model import UNet
-from loss import WeightedCrossEntropyLoss
-
-import json
-
-import sys
+from loss import CrossEntropyLoss
 
 def model_eval(model, data_loader, loss_func):
     loss = 0
