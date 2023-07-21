@@ -26,7 +26,7 @@ def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr
     
     model = UNet(in_channel,first_out_channel).cuda()
 
-    loss_func = WeightedCrossEntropyLoss()
+    loss_func = CrossEntropyLoss()
 
     optimizer = optim.Adadelta(model.parameters(),lr) # weight_decay = 0.5
 
