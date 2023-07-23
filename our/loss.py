@@ -1,14 +1,8 @@
 import torch.nn as nn
 import torch
 import numpy as np
-from ripser import ripser
 import helper_functions as hp
-import persim
-##############################
-import cv2
-##################################
 import gudhi.wasserstein
-import traceback
 
 class WeightedCrossEntropyLoss(nn.Module):
 
