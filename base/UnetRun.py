@@ -15,7 +15,6 @@ for i in range(1,num_of_runs+1):
     trn_folder = '../../data/bucket2/tr'
     val_folder = '../../data/bucket2/val'
     goldBinary_folder = '../../data/goldsBinaryAll'
-    data_type = 'all'
     lr=1.0
     patience = 40
     min_delta = 0.0
