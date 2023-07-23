@@ -48,7 +48,7 @@ def normalizeImage(img):
 
     return normImg.astype(np.float32)
 
-def getData(folder, gold_folder, data_type):
+def getData(folder, gold_folder):
     
     with open('../../data/vesseltypes.json') as f:
         fileTypesDict = json.load(f)
@@ -58,20 +58,18 @@ def getData(folder, gold_folder, data_type):
     data = []
 
     for name in image_names:
-        if data_type == 'all' or (data_type == 'big' and (fileTypesDict[name] == 'f' or fileTypesDict[name] == 'm')
-                                 ) or (data_type == 'small' and (fileTypesDict[name] == 's' or fileTypesDict[name] == 'm')):
-            im = pydicom.dcmread(folder + '/' + name).pixel_array
-            im = np.expand_dims(im,0)
-            im = normalizeImage(im)
-            inpt = []
-            inpt.append(im)
-            inpt.append(name)
+        im = pydicom.dcmread(folder + '/' + name).pixel_array
+        im = np.expand_dims(im,0)
+        im = normalizeImage(im)
+        inpt = []
+        inpt.append(im)
+        inpt.append(name)
 
-            label = prepare_gold_and_weights(gold_folder + '/' + name.split('.')[0] + '.png',
-                                             gold_folder + '/dgms0/' + name.split('.')[0] + '.npy',
-                                             gold_folder + '/dgms1/' + name.split('.')[0] + '.npy')
+        label = prepare_gold_and_weights(gold_folder + '/' + name.split('.')[0] + '.png',
+                                         gold_folder + '/dgms0/' + name.split('.')[0] + '.npy',
+                                         gold_folder + '/dgms1/' + name.split('.')[0] + '.npy')
 
-            data.append([inpt, label])
+        data.append([inpt, label])
 
     return data   
 
