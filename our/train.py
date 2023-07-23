@@ -14,8 +14,6 @@ from loss import WeightedCrossEntropyLoss
 
 import json
 
-import sys
-
 def model_eval(model, data_loader, loss_func, alpha_s, beta_s, alpha_m, beta_m, alpha_f, beta_f):
     with open('../../data/vesseltypes.json') as f:
         fileTypesDict = json.load(f)
@@ -29,7 +27,7 @@ def model_eval(model, data_loader, loss_func, alpha_s, beta_s, alpha_m, beta_m, 
         avrg_loss = loss / len(data_loader)  
         return avrg_loss   
 
-def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name, data_type,
+def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr, patience, min_delta, model_name,
          alpha_s, beta_s, alpha_m, beta_m, alpha_f, beta_f, initial_model):
     
     model = UNet(in_channel,first_out_channel).cuda()
@@ -40,8 +38,8 @@ def train(in_channel, first_out_channel, trn_folder, val_folder, gold_folder, lr
     optimizer = optim.Adadelta(model.parameters(),lr)
     optimizer.load_state_dict(torch.load(initial_model.split('.pth')[0]+'_optim.pth'))
    
-    train_loader = data.DataLoader(hp.getData(trn_folder, gold_folder, data_type),batch_size=1, shuffle=True)
-    val_loader = data.DataLoader(hp.getData(val_folder, gold_folder, data_type), batch_size=1)
+    train_loader = data.DataLoader(hp.getData(trn_folder, gold_folder),batch_size=1, shuffle=True)
+    val_loader = data.DataLoader(hp.getData(val_folder, gold_folder), batch_size=1)
     
     with open('../../data/vesseltypes.json') as f:
         fileTypesDict = json.load(f)
