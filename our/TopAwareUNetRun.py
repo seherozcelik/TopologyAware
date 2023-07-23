@@ -16,7 +16,6 @@ for i in range(1,num_of_runs+1):
     trn_folder = '../../data/bucket2/tr'
     val_folder = '../../data/bucket2/val'
     goldBinary_folder = '../../data/goldsBinaryAll'
-    data_type = 'all'
     lr=1.0
     patience = 40
     min_delta = 0.0
@@ -35,7 +34,7 @@ for i in range(1,num_of_runs+1):
     else:
         initial_model = initial_model_pre + '_' + str(i) + '.pth'
 
-    uNetMain.callMain(in_channel, first_out_channel, trn_folder, val_folder, goldBinary_folder, lr, patience, min_delta, model_name,data_type,alpha_s, beta_s, alpha_m, beta_m, alpha_f, beta_f, initial_model)
+    uNetMain.callMain(in_channel, first_out_channel, trn_folder, val_folder, goldBinary_folder, lr, patience, min_delta, model_name, alpha_s, beta_s, alpha_m, beta_m, alpha_f, beta_f, initial_model)
 
     from IPython.display import display_html
     display_html("<script>Jupyter.notebook.kernel.restart()</script>",raw=True)
