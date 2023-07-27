@@ -1,7 +1,7 @@
 from IPython.display import display_html
 display_html("<script>Jupyter.notebook.kernel.restart()</script>",raw=True)
 
-num_of_runs = 2
+num_of_runs = 5
 for i in range(1,num_of_runs+1):
 
     import warnings
@@ -36,7 +36,7 @@ import IoU_Pixlws_WeighHausdrffByType as evl
 goldBinary_folder = '../../data/goldsBinaryAll'
 ts_folder = '../../data/bucket2/ts'
 model_name_pre = 'weights/allWeightsB2'
-num_of_runs = 2
+num_of_runs = 5
 threshold = 0.5
 excel_name = 'excels/'+model_name_pre.split('/')[1]+'.xlsx'
 print('creating allWeightsB2 scores')
